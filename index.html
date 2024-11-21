@@ -15,6 +15,7 @@
         .product-item { margin-bottom: 15px; }
         .price-info { font-size: 0.9em; color: gray; }
         .total-price { font-weight: bold; color: green; }
+        .order-total { font-size: 1.2em; font-weight: bold; color: #333; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -99,6 +100,11 @@
             <!-- Botón de Enviar -->
             <button type="submit">Enviar Pedido</button>
         </form>
+
+        <!-- Totalizado del Pedido -->
+        <div class="order-total" id="totalPedido">
+            Total a Pagar: $0.00
+        </div>
     </div>
 
     <script>
@@ -106,14 +112,17 @@
         function calcularPrecio() {
             // Precio base por kg
             const precioPorKg = 2;
+            let totalPedido = 0;
             
             // Función para actualizar el precio de un producto
             function actualizarPrecio(cantidad, idPrecio) {
+                let precio = cantidad * precioPorKg;
                 if (cantidad >= 0.5) {
-                    let precio = cantidad * precioPorKg;
                     document.getElementById(idPrecio).textContent = `Total: $${precio.toFixed(2)}`;
+                    return precio;
                 } else {
                     document.getElementById(idPrecio).textContent = "";
+                    return 0;
                 }
             }
 
@@ -128,16 +137,19 @@
             let pechugasPollo = parseFloat(document.getElementById('pechugas_pollo').value) || 0;
             let carneCerdo = parseFloat(document.getElementById('carne_cerdo').value) || 0;
 
-            // Actualizar los precios en la interfaz
-            actualizarPrecio(carneHamburguesa, 'precio_hamburguesa');
-            actualizarPrecio(hotdogs, 'precio_hotdogs');
-            actualizarPrecio(carneMechar, 'precio_mechar');
-            actualizarPrecio(carneGuisar, 'precio_guisar');
-            actualizarPrecio(pollo, 'precio_pollo');
-            actualizarPrecio(piernasPollo, 'precio_piernas_pollo');
-            actualizarPrecio(alasPollo, 'precio_alas_pollo');
-            actualizarPrecio(pechugasPollo, 'precio_pechugas_pollo');
-            actualizarPrecio(carneCerdo, 'precio_cerdo');
+            // Sumar los totales de cada producto
+            totalPedido = actualizarPrecio(carneHamburguesa, 'precio_hamburguesa') +
+                          actualizarPrecio(hotdogs, 'precio_hotdogs') +
+                          actualizarPrecio(carneMechar, 'precio_mechar') +
+                          actualizarPrecio(carneGuisar, 'precio_guisar') +
+                          actualizarPrecio(pollo, 'precio_pollo') +
+                          actualizarPrecio(piernasPollo, 'precio_piernas_pollo') +
+                          actualizarPrecio(alasPollo, 'precio_alas_pollo') +
+                          actualizarPrecio(pechugasPollo, 'precio_pechugas_pollo') +
+                          actualizarPrecio(carneCerdo, 'precio_cerdo');
+
+            // Mostrar el total acumulado
+            document.getElementById('totalPedido').textContent = `Total a Pagar: $${totalPedido.toFixed(2)}`;
         }
     </script>
 </body>
