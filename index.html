@@ -13,70 +13,76 @@
         button:hover { background-color: #45a049; }
         .product-list { list-style-type: none; padding-left: 0; }
         .product-item { margin-bottom: 15px; }
+        .price-info { font-size: 0.9em; color: gray; }
     </style>
 </head>
 <body>
     <h1>Realiza tu Pedido de Carne - Novillito Express</h1>
     <div class="form-container">
         <form action="https://formsubmit.co/your-email@example.com" method="POST">
-            <!-- Nombre del Local -->
+            <!-- Nombre del Cliente -->
             <label for="name">Nombre</label>
             <input type="text" id="name" name="name" required>
 
-            <!-- Teléfono del Local -->
+            <!-- Teléfono del Cliente -->
             <label for="telefono">Teléfono</label>
             <input type="tel" id="telefono" name="telefono" required>
 
-            <!-- Selección de Productos -->
+            <!-- Selección de Productos y Cantidades -->
             <label for="productos">Selecciona los Productos</label>
             <ul class="product-list">
                 <li class="product-item">
-                    <input type="checkbox" id="carne_hamburguesa" name="productos[]" value="Carne de Hamburguesa">
                     <label for="carne_hamburguesa">Carne de Hamburguesa</label>
+                    <input type="number" id="carne_hamburguesa" name="carne_hamburguesa" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <span class="price-info">Precio: $2 por kg</span>
                 </li>
                 <li class="product-item">
-                    <input type="checkbox" id="hotdogs" name="productos[]" value="Hotdogs">
                     <label for="hotdogs">Hotdogs</label>
+                    <input type="number" id="hotdogs" name="hotdogs" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <span class="price-info">Precio: $2 por kg</span>
                 </li>
                 <li class="product-item">
-                    <input type="checkbox" id="carne_mechar" name="productos[]" value="Carne para Mechar">
                     <label for="carne_mechar">Carne para Mechar</label>
+                    <input type="number" id="carne_mechar" name="carne_mechar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <span class="price-info">Precio: $2 por kg</span>
                 </li>
                 <li class="product-item">
-                    <input type="checkbox" id="carne_guisar" name="productos[]" value="Carne para Guisar">
                     <label for="carne_guisar">Carne para Guisar</label>
+                    <input type="number" id="carne_guisar" name="carne_guisar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <span class="price-info">Precio: $2 por kg</span>
                 </li>
                 <li class="product-item">
-                    <input type="checkbox" id="pollo" name="productos[]" value="Pollo">
                     <label for="pollo">Pollo</label>
+                    <input type="number" id="pollo" name="pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <span class="price-info">Precio: $2 por kg</span>
                 </li>
                 <li class="product-item">
-                    <input type="checkbox" id="piernas_pollo" name="productos[]" value="Piernas de Pollo">
                     <label for="piernas_pollo">Piernas de Pollo</label>
+                    <input type="number" id="piernas_pollo" name="piernas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <span class="price-info">Precio: $2 por kg</span>
                 </li>
                 <li class="product-item">
-                    <input type="checkbox" id="alas_pollo" name="productos[]" value="Alas de Pollo">
                     <label for="alas_pollo">Alas de Pollo</label>
+                    <input type="number" id="alas_pollo" name="alas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <span class="price-info">Precio: $2 por kg</span>
                 </li>
                 <li class="product-item">
-                    <input type="checkbox" id="pechugas_pollo" name="productos[]" value="Pechugas de Pollo">
                     <label for="pechugas_pollo">Pechugas de Pollo</label>
+                    <input type="number" id="pechugas_pollo" name="pechugas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <span class="price-info">Precio: $2 por kg</span>
                 </li>
                 <li class="product-item">
-                    <input type="checkbox" id="carne_cerdo" name="productos[]" value="Carne de Cerdo">
                     <label for="carne_cerdo">Carne de Cerdo</label>
+                    <input type="number" id="carne_cerdo" name="carne_cerdo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <span class="price-info">Precio: $2 por kg</span>
                 </li>
             </ul>
-
-            <!-- Cantidad de Carne -->
-            <label for="cantidad">Cantidad (kg)</label>
-            <input type="number" id="cantidad" name="cantidad" min="1" required>
 
             <!-- Dirección Completa -->
             <label for="direccion">Dirección de Envío</label>
             <textarea id="direccion" name="direccion" rows="3" required placeholder="Calle/Av, Nº Casa, Urb, Municipio, Estado"></textarea>
 
-            <!-- Adjuntar Vaucher de Pago -->
+            <!-- Adjuntar Voucher de Pago -->
             <label for="voucher">Adjuntar Voucher de Pago</label>
             <input type="file" id="voucher" name="voucher" accept="image/*, .pdf" required>
 
