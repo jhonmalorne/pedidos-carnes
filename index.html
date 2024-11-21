@@ -14,12 +14,13 @@
         .product-list { list-style-type: none; padding-left: 0; }
         .product-item { margin-bottom: 15px; }
         .price-info { font-size: 0.9em; color: gray; }
+        .total-price { font-weight: bold; color: green; }
     </style>
 </head>
 <body>
     <h1>Realiza tu Pedido de Carne - Novillito Express</h1>
     <div class="form-container">
-        <form action="https://formsubmit.co/your-email@example.com" method="POST">
+        <form action="https://formsubmit.co/your-email@example.com" method="POST" id="orderForm">
             <!-- Nombre del Cliente -->
             <label for="name">Nombre</label>
             <input type="text" id="name" name="name" required>
@@ -33,48 +34,57 @@
             <ul class="product-list">
                 <li class="product-item">
                     <label for="carne_hamburguesa">Carne de Hamburguesa</label>
-                    <input type="number" id="carne_hamburguesa" name="carne_hamburguesa" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <input type="number" id="carne_hamburguesa" name="carne_hamburguesa" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
                     <span class="price-info">Precio: $2 por kg</span>
+                    <div id="precio_hamburguesa" class="total-price"></div>
                 </li>
                 <li class="product-item">
                     <label for="hotdogs">Hotdogs</label>
-                    <input type="number" id="hotdogs" name="hotdogs" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <input type="number" id="hotdogs" name="hotdogs" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
                     <span class="price-info">Precio: $2 por kg</span>
+                    <div id="precio_hotdogs" class="total-price"></div>
                 </li>
                 <li class="product-item">
                     <label for="carne_mechar">Carne para Mechar</label>
-                    <input type="number" id="carne_mechar" name="carne_mechar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <input type="number" id="carne_mechar" name="carne_mechar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
                     <span class="price-info">Precio: $2 por kg</span>
+                    <div id="precio_mechar" class="total-price"></div>
                 </li>
                 <li class="product-item">
                     <label for="carne_guisar">Carne para Guisar</label>
-                    <input type="number" id="carne_guisar" name="carne_guisar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <input type="number" id="carne_guisar" name="carne_guisar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
                     <span class="price-info">Precio: $2 por kg</span>
+                    <div id="precio_guisar" class="total-price"></div>
                 </li>
                 <li class="product-item">
                     <label for="pollo">Pollo</label>
-                    <input type="number" id="pollo" name="pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <input type="number" id="pollo" name="pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
                     <span class="price-info">Precio: $2 por kg</span>
+                    <div id="precio_pollo" class="total-price"></div>
                 </li>
                 <li class="product-item">
                     <label for="piernas_pollo">Piernas de Pollo</label>
-                    <input type="number" id="piernas_pollo" name="piernas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <input type="number" id="piernas_pollo" name="piernas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
                     <span class="price-info">Precio: $2 por kg</span>
+                    <div id="precio_piernas_pollo" class="total-price"></div>
                 </li>
                 <li class="product-item">
                     <label for="alas_pollo">Alas de Pollo</label>
-                    <input type="number" id="alas_pollo" name="alas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <input type="number" id="alas_pollo" name="alas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
                     <span class="price-info">Precio: $2 por kg</span>
+                    <div id="precio_alas_pollo" class="total-price"></div>
                 </li>
                 <li class="product-item">
                     <label for="pechugas_pollo">Pechugas de Pollo</label>
-                    <input type="number" id="pechugas_pollo" name="pechugas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <input type="number" id="pechugas_pollo" name="pechugas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
                     <span class="price-info">Precio: $2 por kg</span>
+                    <div id="precio_pechugas_pollo" class="total-price"></div>
                 </li>
                 <li class="product-item">
                     <label for="carne_cerdo">Carne de Cerdo</label>
-                    <input type="number" id="carne_cerdo" name="carne_cerdo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required>
+                    <input type="number" id="carne_cerdo" name="carne_cerdo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
                     <span class="price-info">Precio: $2 por kg</span>
+                    <div id="precio_cerdo" class="total-price"></div>
                 </li>
             </ul>
 
@@ -90,5 +100,45 @@
             <button type="submit">Enviar Pedido</button>
         </form>
     </div>
+
+    <script>
+        // Función para calcular el precio total
+        function calcularPrecio() {
+            // Precio base por kg
+            const precioPorKg = 2;
+            
+            // Función para actualizar el precio de un producto
+            function actualizarPrecio(cantidad, idPrecio) {
+                if (cantidad >= 0.5) {
+                    let precio = cantidad * precioPorKg;
+                    document.getElementById(idPrecio).textContent = `Total: $${precio.toFixed(2)}`;
+                } else {
+                    document.getElementById(idPrecio).textContent = "";
+                }
+            }
+
+            // Obtener las cantidades de los productos
+            let carneHamburguesa = parseFloat(document.getElementById('carne_hamburguesa').value) || 0;
+            let hotdogs = parseFloat(document.getElementById('hotdogs').value) || 0;
+            let carneMechar = parseFloat(document.getElementById('carne_mechar').value) || 0;
+            let carneGuisar = parseFloat(document.getElementById('carne_guisar').value) || 0;
+            let pollo = parseFloat(document.getElementById('pollo').value) || 0;
+            let piernasPollo = parseFloat(document.getElementById('piernas_pollo').value) || 0;
+            let alasPollo = parseFloat(document.getElementById('alas_pollo').value) || 0;
+            let pechugasPollo = parseFloat(document.getElementById('pechugas_pollo').value) || 0;
+            let carneCerdo = parseFloat(document.getElementById('carne_cerdo').value) || 0;
+
+            // Actualizar los precios en la interfaz
+            actualizarPrecio(carneHamburguesa, 'precio_hamburguesa');
+            actualizarPrecio(hotdogs, 'precio_hotdogs');
+            actualizarPrecio(carneMechar, 'precio_mechar');
+            actualizarPrecio(carneGuisar, 'precio_guisar');
+            actualizarPrecio(pollo, 'precio_pollo');
+            actualizarPrecio(piernasPollo, 'precio_piernas_pollo');
+            actualizarPrecio(alasPollo, 'precio_alas_pollo');
+            actualizarPrecio(pechugasPollo, 'precio_pechugas_pollo');
+            actualizarPrecio(carneCerdo, 'precio_cerdo');
+        }
+    </script>
 </body>
 </html>
