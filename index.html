@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos de Carne</title>
+    <title>Pedidos de Carne - Novillito Express</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         h1 { text-align: center; }
@@ -11,28 +11,76 @@
         label, input, select, textarea { width: 100%; padding: 10px; margin: 10px 0; }
         button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
         button:hover { background-color: #45a049; }
+        .product-list { list-style-type: none; padding-left: 0; }
+        .product-item { margin-bottom: 15px; }
     </style>
 </head>
 <body>
-    <h1>Realiza tu Pedido de Carne</h1>
+    <h1>Realiza tu Pedido de Carne - Novillito Express</h1>
     <div class="form-container">
         <form action="https://formsubmit.co/your-email@example.com" method="POST">
+            <!-- Nombre del Local -->
             <label for="name">Nombre del Local</label>
             <input type="text" id="name" name="name" required>
 
-            <label for="carne">Tipo de Carne</label>
-            <select id="carne" name="carne" required>
-                <option value="Carne de Res">Carne de Res</option>
-                <option value="Carne de Pollo">Carne de Pollo</option>
-                <option value="Carne de Cerdo">Carne de Cerdo</option>
-            </select>
+            <!-- Teléfono del Local -->
+            <label for="telefono">Teléfono</label>
+            <input type="tel" id="telefono" name="telefono" required>
 
+            <!-- Selección de Productos -->
+            <label for="productos">Selecciona los Productos</label>
+            <ul class="product-list">
+                <li class="product-item">
+                    <input type="checkbox" id="carne_hamburguesa" name="productos[]" value="Carne de Hamburguesa">
+                    <label for="carne_hamburguesa">Carne de Hamburguesa</label>
+                </li>
+                <li class="product-item">
+                    <input type="checkbox" id="hotdogs" name="productos[]" value="Hotdogs">
+                    <label for="hotdogs">Hotdogs</label>
+                </li>
+                <li class="product-item">
+                    <input type="checkbox" id="carne_mechar" name="productos[]" value="Carne para Mechar">
+                    <label for="carne_mechar">Carne para Mechar</label>
+                </li>
+                <li class="product-item">
+                    <input type="checkbox" id="carne_guisar" name="productos[]" value="Carne para Guisar">
+                    <label for="carne_guisar">Carne para Guisar</label>
+                </li>
+                <li class="product-item">
+                    <input type="checkbox" id="pollo" name="productos[]" value="Pollo">
+                    <label for="pollo">Pollo</label>
+                </li>
+                <li class="product-item">
+                    <input type="checkbox" id="piernas_pollo" name="productos[]" value="Piernas de Pollo">
+                    <label for="piernas_pollo">Piernas de Pollo</label>
+                </li>
+                <li class="product-item">
+                    <input type="checkbox" id="alas_pollo" name="productos[]" value="Alas de Pollo">
+                    <label for="alas_pollo">Alas de Pollo</label>
+                </li>
+                <li class="product-item">
+                    <input type="checkbox" id="pechugas_pollo" name="productos[]" value="Pechugas de Pollo">
+                    <label for="pechugas_pollo">Pechugas de Pollo</label>
+                </li>
+                <li class="product-item">
+                    <input type="checkbox" id="carne_cerdo" name="productos[]" value="Carne de Cerdo">
+                    <label for="carne_cerdo">Carne de Cerdo</label>
+                </li>
+            </ul>
+
+            <!-- Cantidad de Carne -->
             <label for="cantidad">Cantidad (kg)</label>
             <input type="number" id="cantidad" name="cantidad" min="1" required>
 
+            <!-- Dirección Completa -->
             <label for="direccion">Dirección de Envío</label>
-            <textarea id="direccion" name="direccion" rows="3" required></textarea>
+            <textarea id="direccion" name="direccion" rows="3" required placeholder="Calle/Av, Nº Casa, Urb, Municipio, Estado"></textarea>
 
+            <!-- Adjuntar Vaucher de Pago -->
+            <label for="voucher">Adjuntar Voucher de Pago</label>
+            <input type="file" id="voucher" name="voucher" accept="image/*, .pdf" required>
+
+            <!-- Botón de Enviar -->
             <button type="submit">Enviar Pedido</button>
         </form>
     </div>
