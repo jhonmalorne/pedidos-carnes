@@ -36,18 +36,57 @@
                 <li class="product-item">
                     <label for="carne_hamburguesa">Carne de Hamburguesa</label>
                     <input type="number" id="carne_hamburguesa" name="carne_hamburguesa" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
-                    <span class="price-info">Precio: $2 por kg</span>
+                    <span class="price-info">Precio: $2 por kg / Bs. 60,000 por kg</span>
                     <div id="precio_hamburguesa" class="total-price"></div>
-                    <div id="precio_hamburguesa_bs" class="total-price"></div>
                 </li>
                 <li class="product-item">
                     <label for="hotdogs">Hotdogs</label>
-                    <input type="number" id="hotdogs" name="hotdogs" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
-                    <span class="price-info">Precio: $2 por kg</span>
+                    <input type="number" id="hotdogs" name="hotdogs" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $2 por kg / Bs. 60,000 por kg</span>
                     <div id="precio_hotdogs" class="total-price"></div>
-                    <div id="precio_hotdogs_bs" class="total-price"></div>
                 </li>
-                <!-- Repite para los demás productos de la misma forma -->
+                <li class="product-item">
+                    <label for="carne_mechar">Carne para Mechar</label>
+                    <input type="number" id="carne_mechar" name="carne_mechar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $2 por kg / Bs. 60,000 por kg</span>
+                    <div id="precio_mechar" class="total-price"></div>
+                </li>
+                <li class="product-item">
+                    <label for="carne_guisar">Carne para Guisar</label>
+                    <input type="number" id="carne_guisar" name="carne_guisar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $2 por kg / Bs. 60,000 por kg</span>
+                    <div id="precio_guisar" class="total-price"></div>
+                </li>
+                <li class="product-item">
+                    <label for="pollo">Pollo</label>
+                    <input type="number" id="pollo" name="pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $2 por kg / Bs. 60,000 por kg</span>
+                    <div id="precio_pollo" class="total-price"></div>
+                </li>
+                <li class="product-item">
+                    <label for="piernas_pollo">Piernas de Pollo</label>
+                    <input type="number" id="piernas_pollo" name="piernas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $2 por kg / Bs. 60,000 por kg</span>
+                    <div id="precio_piernas_pollo" class="total-price"></div>
+                </li>
+                <li class="product-item">
+                    <label for="alas_pollo">Alas de Pollo</label>
+                    <input type="number" id="alas_pollo" name="alas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $2 por kg / Bs. 60,000 por kg</span>
+                    <div id="precio_alas_pollo" class="total-price"></div>
+                </li>
+                <li class="product-item">
+                    <label for="pechugas_pollo">Pechugas de Pollo</label>
+                    <input type="number" id="pechugas_pollo" name="pechugas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $2 por kg / Bs. 60,000 por kg</span>
+                    <div id="precio_pechugas_pollo" class="total-price"></div>
+                </li>
+                <li class="product-item">
+                    <label for="carne_cerdo">Carne de Cerdo</label>
+                    <input type="number" id="carne_cerdo" name="carne_cerdo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $2 por kg / Bs. 60,000 por kg</span>
+                    <div id="precio_cerdo" class="total-price"></div>
+                </li>
             </ul>
 
             <!-- Dirección Completa -->
@@ -64,29 +103,30 @@
 
         <!-- Totalizado del Pedido -->
         <div class="order-total" id="totalPedido">
-            Total a Pagar: $0.00 / Bs 0.00
+            Total a Pagar: $0.00 / Bs. 0.00
         </div>
     </div>
 
     <script>
+        // Tasa de cambio de USD a VES (ajustar según sea necesario)
+        const tasaDeCambio = 30000; // 1 USD = 30,000 VES
+
         // Función para calcular el precio total
         function calcularPrecio() {
-            // Precio base por kg y tasa de cambio
-            const precioPorKg = 2;
-            const tasaDeCambio = 46.06; // Bs por $
-            let totalPedido = 0;
-            
-            // Función para actualizar el precio de un producto
-            function actualizarPrecio(cantidad, idPrecio, idPrecioBs) {
-                let precioDolares = cantidad * precioPorKg;
-                let precioBs = precioDolares * tasaDeCambio;
+            // Precio base por kg
+            const precioPorKgUSD = 2;
+            let totalPedidoUSD = 0;
+
+            // Función para actualizar el precio de un producto en ambas monedas
+            function actualizarPrecio(cantidad, idPrecio) {
+                let precioUSD = cantidad * precioPorKgUSD;
+                let precioVES = precioUSD * tasaDeCambio;
+
                 if (cantidad >= 0.5) {
-                    document.getElementById(idPrecio).textContent = `Total: $${precioDolares.toFixed(2)}`;
-                    document.getElementById(idPrecioBs).textContent = `Total: Bs ${precioBs.toFixed(2)}`;
-                    return precioDolares;
+                    document.getElementById(idPrecio).textContent = `Total: $${precioUSD.toFixed(2)} / Bs. ${precioVES.toFixed(2)}`;
+                    return precioUSD;
                 } else {
                     document.getElementById(idPrecio).textContent = "";
-                    document.getElementById(idPrecioBs).textContent = "";
                     return 0;
                 }
             }
@@ -102,20 +142,22 @@
             let pechugasPollo = parseFloat(document.getElementById('pechugas_pollo').value) || 0;
             let carneCerdo = parseFloat(document.getElementById('carne_cerdo').value) || 0;
 
-            // Sumar los totales de cada producto
-            totalPedido = actualizarPrecio(carneHamburguesa, 'precio_hamburguesa', 'precio_hamburguesa_bs') +
-                          actualizarPrecio(hotdogs, 'precio_hotdogs', 'precio_hotdogs_bs') +
-                          actualizarPrecio(carneMechar, 'precio_mechar', 'precio_mechar_bs') +
-                          actualizarPrecio(carneGuisar, 'precio_guisar', 'precio_guisar_bs') +
-                          actualizarPrecio(pollo, 'precio_pollo', 'precio_pollo_bs') +
-                          actualizarPrecio(piernasPollo, 'precio_piernas_pollo', 'precio_piernas_pollo_bs') +
-                          actualizarPrecio(alasPollo, 'precio_alas_pollo', 'precio_alas_pollo_bs') +
-                          actualizarPrecio(pechugasPollo, 'precio_pechugas_pollo', 'precio_pechugas_pollo_bs') +
-                          actualizarPrecio(carneCerdo, 'precio_cerdo', 'precio_cerdo_bs');
+            // Actualizar precios individuales de cada producto
+            totalPedidoUSD += actualizarPrecio(carneHamburguesa, 'precio_hamburguesa');
+            totalPedidoUSD += actualizarPrecio(hotdogs, 'precio_hotdogs');
+            totalPedidoUSD += actualizarPrecio(carneMechar, 'precio_mechar');
+            totalPedidoUSD += actualizarPrecio(carneGuisar, 'precio_guisar');
+            totalPedidoUSD += actualizarPrecio(pollo, 'precio_pollo');
+            totalPedidoUSD += actualizarPrecio(piernasPollo, 'precio_piernas_pollo');
+            totalPedidoUSD += actualizarPrecio(alasPollo, 'precio_alas_pollo');
+            totalPedidoUSD += actualizarPrecio(pechugasPollo, 'precio_pechugas_pollo');
+            totalPedidoUSD += actualizarPrecio(carneCerdo, 'precio_cerdo');
 
-            // Mostrar el total acumulado
-            let totalBs = totalPedido * tasaDeCambio;
-            document.getElementById('totalPedido').textContent = `Total a Pagar: $${totalPedido.toFixed(2)} / Bs ${totalBs.toFixed(2)}`;
+            // Calcular total en VES
+            let totalPedidoVES = totalPedidoUSD * tasaDeCambio;
+
+            // Mostrar el total en ambas monedas
+            document.getElementById('totalPedido').textContent = `Total a Pagar: $${totalPedidoUSD.toFixed(2)} / Bs. ${totalPedidoVES.toFixed(2)}`;
         }
     </script>
 </body>
