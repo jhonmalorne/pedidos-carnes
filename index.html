@@ -21,7 +21,7 @@
         .product-item { margin-bottom: 15px; }
         .price-info { font-size: 0.9em; color: gray; }
         .total-price { font-weight: bold; color: green; }
-        .order-total { font-size: 1.2em; font-weight: bold; color: #333; margin-top: 20px; }
+        .order-total { font-size: 1.2em; font-weight: bold; color: #333; margin-top: 20px; text-align: center; }
     </style>
 </head>
 <body>
@@ -130,24 +130,38 @@
     </div>
 
     <script>
-        let tasaDeCambio = 46.06; // Tasa de cambio para convertir dólares a bolívares
-
         function calcularPrecio() {
-            let productos = ['carne_hamburguesa', 'carne_molida', 'carne_mechar', 'carne_guisar', 'bisteck', 'pollo_entero', 'carne_cerdo', 'alas_pollo', 'piernas_pollo', 'pechuga_pollo'];
-            let totalDolares = 0;
-            let totalBs = 0;
+            const precioKg = 1; // Precio por kg en dólares
+            const cambioBs = 46.06; // Valor de 1 dólar en bolívares
 
-            productos.forEach(producto => {
-                let cantidad = parseFloat(document.getElementById(producto).value) || 0;
-                let precioProducto = cantidad * 1; // Precio por kg ($1 por kg)
-                totalDolares += precioProducto;
+            const carneHamburguesa = parseFloat(document.getElementById("carne_hamburguesa").value) || 0;
+            const carneMolida = parseFloat(document.getElementById("carne_molida").value) || 0;
+            const carneMechar = parseFloat(document.getElementById("carne_mechar").value) || 0;
+            const carneGuisar = parseFloat(document.getElementById("carne_guisar").value) || 0;
+            const bisteck = parseFloat(document.getElementById("bisteck").value) || 0;
+            const polloEntero = parseFloat(document.getElementById("pollo_entero").value) || 0;
+            const carneCerdo = parseFloat(document.getElementById("carne_cerdo").value) || 0;
+            const alasPollo = parseFloat(document.getElementById("alas_pollo").value) || 0;
+            const piernasPollo = parseFloat(document.getElementById("piernas_pollo").value) || 0;
+            const pechugaPollo = parseFloat(document.getElementById("pechuga_pollo").value) || 0;
 
-                let totalBsProducto = precioProducto * tasaDeCambio;
-                document.getElementById("precio_" + producto).innerText = "$" + precioProducto.toFixed(2) + " / Bs. " + totalBsProducto.toFixed(2);
-            });
+            const total = (carneHamburguesa + carneMolida + carneMechar + carneGuisar + bisteck + polloEntero + carneCerdo + alasPollo + piernasPollo + pechugaPollo) * precioKg;
+            const totalBs = total * cambioBs;
 
-            totalBs = totalDolares * tasaDeCambio;
-            document.getElementById("totalPedido").innerText = "Total a Pagar: $" + totalDolares.toFixed(2) + " / Bs. " + totalBs.toFixed(2);
+            // Actualización de los precios individuales
+            document.getElementById("precio_hamburguesa").textContent = `$${carneHamburguesa * precioKg} / Bs. ${(carneHamburguesa * precioKg * cambioBs).toFixed(2)}`;
+            document.getElementById("precio_molida").textContent = `$${carneMolida * precioKg} / Bs. ${(carneMolida * precioKg * cambioBs).toFixed(2)}`;
+            document.getElementById("precio_mechar").textContent = `$${carneMechar * precioKg} / Bs. ${(carneMechar * precioKg * cambioBs).toFixed(2)}`;
+            document.getElementById("precio_guisar").textContent = `$${carneGuisar * precioKg} / Bs. ${(carneGuisar * precioKg * cambioBs).toFixed(2)}`;
+            document.getElementById("precio_bisteck").textContent = `$${bisteck * precioKg} / Bs. ${(bisteck * precioKg * cambioBs).toFixed(2)}`;
+            document.getElementById("precio_pollo_entero").textContent = `$${polloEntero * precioKg} / Bs. ${(polloEntero * precioKg * cambioBs).toFixed(2)}`;
+            document.getElementById("precio_cerdo").textContent = `$${carneCerdo * precioKg} / Bs. ${(carneCerdo * precioKg * cambioBs).toFixed(2)}`;
+            document.getElementById("precio_alas_pollo").textContent = `$${alasPollo * precioKg} / Bs. ${(alasPollo * precioKg * cambioBs).toFixed(2)}`;
+            document.getElementById("precio_piernas_pollo").textContent = `$${piernasPollo * precioKg} / Bs. ${(piernasPollo * precioKg * cambioBs).toFixed(2)}`;
+            document.getElementById("precio_pechuga_pollo").textContent = `$${pechugaPollo * precioKg} / Bs. ${(pechugaPollo * precioKg * cambioBs).toFixed(2)}`;
+
+            // Mostrar total
+            document.getElementById("totalPedido").textContent = `Total a Pagar: $${total.toFixed(2)} / Bs. ${(total * cambioBs).toFixed(2)}`;
         }
     </script>
 </body>
