@@ -41,17 +41,79 @@
             <label for="telefono">Teléfono</label>
             <input type="tel" id="telefono" name="telefono" required>
 
-            <!-- Selección de Productos y Cantidades -->
+               <!-- Selección de Productos y Cantidades -->
             <label for="productos">Selecciona los Productos</label>
             <ul class="product-list">
-                <!-- Lista de productos -->
+                <!-- Carne de Hamburguesa -->
+                <li class="product-item">
+                    <label for="carne_hamburguesa">Carne de Hamburguesa</label>
+                    <input type="number" id="carne_hamburguesa" name="carne_hamburguesa" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $1 por kg</span>
+                    <div id="precio_hamburguesa" class="total-price"></div>
+                </li>
+                <!-- Carne Molida -->
                 <li class="product-item">
                     <label for="carne_molida">Carne Molida</label>
-                    <input type="number" id="carne_molida" name="carne_molida" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
+                    <input type="number" id="carne_molida" name="carne_molida" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
                     <span class="price-info">Precio: $1 por kg</span>
-                    <div id="precio_carne_molida" class="total-price"></div>
+                    <div id="precio_molida" class="total-price"></div>
                 </li>
-                <!-- Agrega los demás productos aquí con la misma estructura -->
+                <!-- Carne para Mechar -->
+                <li class="product-item">
+                    <label for="carne_mechar">Carne para Mechar</label>
+                    <input type="number" id="carne_mechar" name="carne_mechar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $1 por kg</span>
+                    <div id="precio_mechar" class="total-price"></div>
+                </li>
+                <!-- Carne para Guisar -->
+                <li class="product-item">
+                    <label for="carne_guisar">Carne para Guisar</label>
+                    <input type="number" id="carne_guisar" name="carne_guisar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $1 por kg</span>
+                    <div id="precio_guisar" class="total-price"></div>
+                </li>
+                <!-- Bisteck -->
+                <li class="product-item">
+                    <label for="bisteck">Bisteck</label>
+                    <input type="number" id="bisteck" name="bisteck" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $1 por kg</span>
+                    <div id="precio_bisteck" class="total-price"></div>
+                </li>
+                <!-- Pollo Entero -->
+                <li class="product-item">
+                    <label for="pollo_entero">Pollo Entero</label>
+                    <input type="number" id="pollo_entero" name="pollo_entero" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $1 por kg</span>
+                    <div id="precio_pollo_entero" class="total-price"></div>
+                </li>
+                <!-- Carne de Cerdo -->
+                <li class="product-item">
+                    <label for="carne_cerdo">Carne de Cerdo</label>
+                    <input type="number" id="carne_cerdo" name="carne_cerdo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $1 por kg</span>
+                    <div id="precio_cerdo" class="total-price"></div>
+                </li>
+                <!-- Alas de Pollo -->
+                <li class="product-item">
+                    <label for="alas_pollo">Alas de Pollo</label>
+                    <input type="number" id="alas_pollo" name="alas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $1 por kg</span>
+                    <div id="precio_alas_pollo" class="total-price"></div>
+                </li>
+                <!-- Piernas de Pollo -->
+                <li class="product-item">
+                    <label for="piernas_pollo">Piernas de Pollo</label>
+                    <input type="number" id="piernas_pollo" name="piernas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $1 por kg</span>
+                    <div id="precio_piernas_pollo" class="total-price"></div>
+                </li>
+                <!-- Pechuga de Pollo -->
+                <li class="product-item">
+                    <label for="pechuga_pollo">Pechuga de Pollo</label>
+                    <input type="number" id="pechuga_pollo" name="pechuga_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $1 por kg</span>
+                    <div id="precio_pechuga_pollo" class="total-price"></div>
+                </li>
             </ul>
 
             <!-- Dirección Completa -->
