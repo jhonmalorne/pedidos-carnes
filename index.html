@@ -94,16 +94,26 @@
                     <div id="precio_piernas_pollo" class="total-price"></div>
                 </li>
                 <li class="product-item">
-                    <label for="bistec">Bistec</label>
-                    <input type="number" id="bistec" name="bistec" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
+                    <label for="bisteck">Bisteck</label>
+                    <input type="number" id="bisteck" name="bisteck" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
                     <span class="price-info">Precio: $1 por kg</span>
-                    <div id="precio_bistec" class="total-price"></div>
+                    <div id="precio_bisteck" class="total-price"></div>
                 </li>
             </ul>
 
             <!-- Dirección Completa -->
             <label for="direccion">Dirección de Envío</label>
             <textarea id="direccion" name="direccion" rows="3" required placeholder="Ingresa tu dirección completa"></textarea>
+
+            <!-- Métodos de Pago -->
+            <label for="pago">Selecciona tu Método de Pago</label>
+            <div class="payment-methods">
+                <a href="https://wa.me/c/51994713144" target="_blank">WhatsApp</a>
+                <a href="https://billetera.usdt/" target="_blank">USDT (0.000000000000000)</a>
+                <a href="https://banesco.com/51648643516848641351" target="_blank">Banesco (51648643516848641351)</a>
+                <a href="https://venezuela.com/51544640113135413541" target="_blank">Banco de Venezuela (51544640113135413541)</a>
+                <a href="https://pagomovil.com/967046200" target="_blank">Pago Móvil (967046200)</a>
+            </div>
 
             <!-- Botón de Enviar Pedido -->
             <button type="submit">Enviar Pedido</button>
@@ -117,34 +127,4 @@
             </div>
         </form>
         <div class="order-total">
-            <p>Total de tu pedido: <span id="totalCompra">$0.00</span></p>
-        </div>
-    </div>
-
-    <script>
-        function calcularPrecio() {
-            const preciosPorKg = {
-                carne_molida: 1,
-                carne_guisar: 1,
-                carne_mechar: 1,
-                carne_hamburguesa: 1,
-                pollo: 1,
-                carne_cerdo: 1,
-                alas_pollo: 1,
-                piernas_pollo: 1,
-                bistec: 1,
-            };
-
-            let total = 0;
-            Object.keys(preciosPorKg).forEach(producto => {
-                const cantidad = parseFloat(document.getElementById(producto).value) || 0;
-                const precio = preciosPorKg[producto] * cantidad;
-                document.getElementById('precio_' + producto).textContent = `$${precio.toFixed(2)}`;
-                total += precio;
-            });
-
-            document.getElementById('totalCompra').textContent = `$${total.toFixed(2)}`;
-        }
-    </script>
-</body>
-</html>
+           
