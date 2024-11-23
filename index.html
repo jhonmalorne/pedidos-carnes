@@ -41,78 +41,63 @@
             <label for="telefono">Teléfono</label>
             <input type="tel" id="telefono" name="telefono" required>
 
-               <!-- Selección de Productos y Cantidades -->
+            <!-- Selección de Productos y Cantidades -->
             <label for="productos">Selecciona los Productos</label>
             <ul class="product-list">
-                <!-- Carne de Hamburguesa -->
-                <li class="product-item">
-                    <label for="carne_hamburguesa">Carne de Hamburguesa</label>
-                    <input type="number" id="carne_hamburguesa" name="carne_hamburguesa" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
-                    <span class="price-info">Precio: $1 por kg</span>
-                    <div id="precio_hamburguesa" class="total-price"></div>
-                </li>
-                <!-- Carne Molida -->
+                <!-- Lista de productos -->
                 <li class="product-item">
                     <label for="carne_molida">Carne Molida</label>
-                    <input type="number" id="carne_molida" name="carne_molida" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <input type="number" id="carne_molida" name="carne_molida" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
                     <span class="price-info">Precio: $1 por kg</span>
-                    <div id="precio_molida" class="total-price"></div>
+                    <div id="precio_carne_molida" class="total-price"></div>
                 </li>
-                <!-- Carne para Mechar -->
-                <li class="product-item">
-                    <label for="carne_mechar">Carne para Mechar</label>
-                    <input type="number" id="carne_mechar" name="carne_mechar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
-                    <span class="price-info">Precio: $1 por kg</span>
-                    <div id="precio_mechar" class="total-price"></div>
-                </li>
-                <!-- Carne para Guisar -->
                 <li class="product-item">
                     <label for="carne_guisar">Carne para Guisar</label>
-                    <input type="number" id="carne_guisar" name="carne_guisar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <input type="number" id="carne_guisar" name="carne_guisar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
                     <span class="price-info">Precio: $1 por kg</span>
-                    <div id="precio_guisar" class="total-price"></div>
+                    <div id="precio_carne_guisar" class="total-price"></div>
                 </li>
-                <!-- Bisteck -->
                 <li class="product-item">
-                    <label for="bisteck">Bisteck</label>
-                    <input type="number" id="bisteck" name="bisteck" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <label for="carne_mechar">Carne para Mechar</label>
+                    <input type="number" id="carne_mechar" name="carne_mechar" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
                     <span class="price-info">Precio: $1 por kg</span>
-                    <div id="precio_bisteck" class="total-price"></div>
+                    <div id="precio_carne_mechar" class="total-price"></div>
                 </li>
-                <!-- Pollo Entero -->
                 <li class="product-item">
-                    <label for="pollo_entero">Pollo Entero</label>
-                    <input type="number" id="pollo_entero" name="pollo_entero" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <label for="carne_hamburguesa">Carne de Hamburguesa</label>
+                    <input type="number" id="carne_hamburguesa" name="carne_hamburguesa" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
                     <span class="price-info">Precio: $1 por kg</span>
-                    <div id="precio_pollo_entero" class="total-price"></div>
+                    <div id="precio_carne_hamburguesa" class="total-price"></div>
                 </li>
-                <!-- Carne de Cerdo -->
+                <li class="product-item">
+                    <label for="pollo">Pollo</label>
+                    <input type="number" id="pollo" name="pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $1 por kg</span>
+                    <div id="precio_pollo" class="total-price"></div>
+                </li>
                 <li class="product-item">
                     <label for="carne_cerdo">Carne de Cerdo</label>
-                    <input type="number" id="carne_cerdo" name="carne_cerdo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <input type="number" id="carne_cerdo" name="carne_cerdo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
                     <span class="price-info">Precio: $1 por kg</span>
-                    <div id="precio_cerdo" class="total-price"></div>
+                    <div id="precio_carne_cerdo" class="total-price"></div>
                 </li>
-                <!-- Alas de Pollo -->
                 <li class="product-item">
                     <label for="alas_pollo">Alas de Pollo</label>
-                    <input type="number" id="alas_pollo" name="alas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <input type="number" id="alas_pollo" name="alas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
                     <span class="price-info">Precio: $1 por kg</span>
                     <div id="precio_alas_pollo" class="total-price"></div>
                 </li>
-                <!-- Piernas de Pollo -->
                 <li class="product-item">
                     <label for="piernas_pollo">Piernas de Pollo</label>
-                    <input type="number" id="piernas_pollo" name="piernas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <input type="number" id="piernas_pollo" name="piernas_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
                     <span class="price-info">Precio: $1 por kg</span>
                     <div id="precio_piernas_pollo" class="total-price"></div>
                 </li>
-                <!-- Pechuga de Pollo -->
                 <li class="product-item">
-                    <label for="pechuga_pollo">Pechuga de Pollo</label>
-                    <input type="number" id="pechuga_pollo" name="pechuga_pollo" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
+                    <label for="bistec">Bistec</label>
+                    <input type="number" id="bistec" name="bistec" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
                     <span class="price-info">Precio: $1 por kg</span>
-                    <div id="precio_pechuga_pollo" class="total-price"></div>
+                    <div id="precio_bistec" class="total-price"></div>
                 </li>
             </ul>
 
@@ -120,24 +105,8 @@
             <label for="direccion">Dirección de Envío</label>
             <textarea id="direccion" name="direccion" rows="3" required placeholder="Ingresa tu dirección completa"></textarea>
 
-            <!-- Métodos de Pago -->
-            <label for="pago">Selecciona tu Método de Pago</label>
-            <div class="payment-methods">
-                <a href="https://wa.me/c/51994713144" target="_blank">WhatsApp</a>
-                <a href="https://billetera.usdt/" target="_blank">USDT (0.000000000000000)</a>
-                <a href="https://banesco.com/51648643516848641351" target="_blank">Banesco (51648643516848641351)</a>
-                <a href="https://venezuela.com/51544640113135413541" target="_blank">Banco de Venezuela (51544640113135413541)</a>
-                <a href="https://pagomovil.com/967046200" target="_blank">Pago Móvil (967046200)</a>
-            </div>
-
             <!-- Botón de Enviar Pedido -->
             <button type="submit">Enviar Pedido</button>
-
-            <!-- Totalizado del Pedido -->
-        <div class="order-total" id="totalPedido">
-            Total a Pagar: $0.00 / Bs. 0.00
-        </div>
-    </div>
 
             <!-- WhatsApp -->
             <div class="whatsapp-btn">
@@ -156,7 +125,14 @@
         function calcularPrecio() {
             const preciosPorKg = {
                 carne_molida: 1,
-                // Agrega los demás productos aquí
+                carne_guisar: 1,
+                carne_mechar: 1,
+                carne_hamburguesa: 1,
+                pollo: 1,
+                carne_cerdo: 1,
+                alas_pollo: 1,
+                piernas_pollo: 1,
+                bistec: 1,
             };
 
             let total = 0;
@@ -169,51 +145,6 @@
 
             document.getElementById('totalCompra').textContent = `$${total.toFixed(2)}`;
         }
-              // Función para actualizar el precio de un producto en ambas monedas
-            function actualizarPrecio(cantidad, idPrecio, producto) {
-                let precioUSD = cantidad * precioPorKgUSD[producto];
-                let precioVES = precioUSD * tasaDeCambio;
-
-                if (cantidad >= 0.5) {
-                    document.getElementById(idPrecio).textContent = `Total: $${precioUSD.toFixed(2)} / Bs. ${precioVES.toFixed(2)}`;
-                    return precioUSD;
-                } else {
-                    document.getElementById(idPrecio).textContent = "";
-                    return 0;
-                }
-            }
-
-            // Obtener las cantidades de los productos
-            let carneHamburguesa = parseFloat(document.getElementById('carne_hamburguesa').value) || 0;
-            let carneMolida = parseFloat(document.getElementById('carne_molida').value) || 0;
-            let carneMechar = parseFloat(document.getElementById('carne_mechar').value) || 0;
-            let carneGuisar = parseFloat(document.getElementById('carne_guisar').value) || 0;
-            let bisteck = parseFloat(document.getElementById('bisteck').value) || 0;
-            let polloEntero = parseFloat(document.getElementById('pollo_entero').value) || 0;
-            let carneCerdo = parseFloat(document.getElementById('carne_cerdo').value) || 0;
-            let alasPollo = parseFloat(document.getElementById('alas_pollo').value) || 0;
-            let piernasPollo = parseFloat(document.getElementById('piernas_pollo').value) || 0;
-            let pechugaPollo = parseFloat(document.getElementById('pechuga_pollo').value) || 0;
-
-            // Actualizar precios individuales de cada producto
-            totalPedidoUSD += actualizarPrecio(carneHamburguesa, 'precio_hamburguesa', 'carne_hamburguesa');
-            totalPedidoUSD += actualizarPrecio(carneMolida, 'precio_molida', 'carne_molida');
-            totalPedidoUSD += actualizarPrecio(carneMechar, 'precio_mechar', 'carne_mechar');
-            totalPedidoUSD += actualizarPrecio(carneGuisar, 'precio_guisar', 'carne_guisar');
-            totalPedidoUSD += actualizarPrecio(bisteck, 'precio_bisteck', 'bisteck');
-            totalPedidoUSD += actualizarPrecio(polloEntero, 'precio_pollo_entero', 'pollo_entero');
-            totalPedidoUSD += actualizarPrecio(carneCerdo, 'precio_cerdo', 'carne_cerdo');
-            totalPedidoUSD += actualizarPrecio(alasPollo, 'precio_alas_pollo', 'alas_pollo');
-            totalPedidoUSD += actualizarPrecio(piernasPollo, 'precio_piernas_pollo', 'piernas_pollo');
-            totalPedidoUSD += actualizarPrecio(pechugaPollo, 'precio_pechuga_pollo', 'pechuga_pollo');
-
-            // Calcular total en VES
-            let totalPedidoVES = totalPedidoUSD * tasaDeCambio;
-
-            // Mostrar el total en ambas monedas
-            document.getElementById('totalPedido').textContent = `Total a Pagar: $${totalPedidoUSD.toFixed(2)} / Bs. ${totalPedidoVES.toFixed(2)}`;
-        }
-    </script>
     </script>
 </body>
 </html>
