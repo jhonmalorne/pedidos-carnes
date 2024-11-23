@@ -24,6 +24,8 @@
         .order-total { font-size: 1.2em; font-weight: bold; color: #333; margin-top: 20px; text-align: center; }
         .payment-methods img { width: 30px; margin: 0 10px; }
         .payment-methods a { text-decoration: none; }
+        .whatsapp-btn { display: inline-block; margin-top: 20px; text-align: center; }
+        .whatsapp-btn img { width: 40px; }
     </style>
 </head>
 <body>
@@ -131,42 +133,52 @@
         </div>
 
         <!-- Métodos de Pago -->
-        <div class="payment-methods" style="text-align: center; margin-top: 30px;">
-            <h3>Forma de Pago</h3>
-            <a href="https://wa.me/1234567890" target="_blank"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
-            <a href="https://www.paypal.com" target="_blank"><img src="paypal-icon.png" alt="USDT"></a>
-            <a href="https://www.banesco.com" target="_blank"><img src="banesco-icon.png" alt="Banesco"></a>
-            <a href="https://www.bancodevenezuela.com" target="_blank"><img src="banco-venezuela-icon.png" alt="Banco de Venezuela"></a>
-            <a href="https://www.pagomovil.com" target="_blank"><img src="pago-movil-icon.png" alt="Pago Móvil"></a>
+        <div class="payment-methods" style="text-align:center;">
+            <h2>Métodos de Pago</h2>
+            <a href="https://www.pagoefe.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Logo_Efectivo.png/280px-Logo_Efectivo.png" alt="Pago EFE"></a>
+            <a href="https://www.paypal.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/3/39/PayPal_logo_2014.svg" alt="PayPal"></a>
+            <a href="https://www.mercadopago.com.pe" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Mercado_Pago_logo.svg" alt="Mercado Pago"></a>
+        </div>
+
+        <!-- WhatsApp -->
+        <div class="whatsapp-btn">
+            <a href="https://wa.me/1234567890" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/WhatsApp.svg" alt="WhatsApp"> 
+                Contactar por WhatsApp
+            </a>
         </div>
     </div>
 
     <script>
         function calcularPrecio() {
-            const productos = [
-                { id: 'carne_hamburguesa', precio: 1 },
-                { id: 'carne_molida', precio: 1 },
-                { id: 'carne_mechar', precio: 1 },
-                { id: 'carne_guisar', precio: 1 },
-                { id: 'bisteck', precio: 1 },
-                { id: 'pollo_entero', precio: 1 },
-                { id: 'carne_cerdo', precio: 1 },
-                { id: 'alas_pollo', precio: 1 },
-                { id: 'piernas_pollo', precio: 1 },
-                { id: 'pechuga_pollo', precio: 1 }
-            ];
+            const precios = {
+                carne_hamburguesa: 1,
+                carne_molida: 1,
+                carne_mechar: 1,
+                carne_guisar: 1,
+                bisteck: 1,
+                pollo_entero: 1,
+                carne_cerdo: 1,
+                alas_pollo: 1,
+                piernas_pollo: 1,
+                pechuga_pollo: 1
+            };
 
             let total = 0;
 
-            productos.forEach(producto => {
-                const cantidad = document.getElementById(producto.id).value || 0;
-                const precioTotal = cantidad * producto.precio;
-                total += precioTotal;
-                document.getElementById(`precio_${producto.id}`).innerText = `$${precioTotal.toFixed(2)}`;
-            });
+            for (let producto in precios) {
+                const cantidad = parseFloat(document.getElementById(producto).value) || 0;
+                const precio = precios[producto];
+                total += cantidad * precio;
 
-            const totalEnBs = (total * 10).toFixed(2); // Suponiendo que 1$ = 10 Bs
-            document.getElementById('totalPedido').innerText = `Total a Pagar: $${total.toFixed(2)} / Bs. ${totalEnBs}`;
+                // Mostrar precios individuales
+                const precioElemento = document.getElementById(`precio_${producto}`);
+                precioElemento.textContent = `Total: $${(cantidad * precio).toFixed(2)}`;
+            }
+
+            // Mostrar total
+            const totalPedido = document.getElementById("totalPedido");
+            totalPedido.textContent = `Total a Pagar: $${total.toFixed(2)} / Bs. ${(total * 25).toFixed(2)}`;
         }
     </script>
 </body>
