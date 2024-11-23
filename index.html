@@ -64,7 +64,7 @@
                     <div id="precio_carne_mechar" class="total-price"></div>
                 </li>
                 <li class="product-item">
-                    <label for="carne_hamburguesa">Carne de Hamburguesa</label>
+                    <label for="carne_hamburguesa">Carne para Hamburguesa</label>
                     <input type="number" id="carne_hamburguesa" name="carne_hamburguesa" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
                     <span class="price-info">Precio: $1 por kg</span>
                     <div id="precio_carne_hamburguesa" class="total-price"></div>
@@ -127,4 +127,38 @@
             </div>
         </form>
         <div class="order-total">
-           
+            <p>Total de tu pedido: <span id="totalCompra">$0.00</span></p>
+            <p>Total en VES: <span id="totalCompraVES">Bs. 0.00</span></p>
+        </div>
+    </div>
+
+    <script>
+        const tasaVES = 25; // Define la tasa de cambio de USD a VES (puedes actualizarla)
+
+        function calcularPrecio() {
+            const preciosPorKg = {
+                carne_molida: 1,
+                carne_guisar: 1,
+                carne_mechar: 1,
+                carne_hamburguesa: 1,
+                pollo: 1,
+                carne_cerdo: 1,
+                alas_pollo: 1,
+                piernas_pollo: 1,
+                bisteck: 1
+            };
+
+            let totalUSD = 0;
+            Object.keys(preciosPorKg).forEach(producto => {
+                const cantidad = parseFloat(document.getElementById(producto).value) || 0;
+                const precio = preciosPorKg[producto] * cantidad;
+                document.getElementById('precio_' + producto).textContent = `$${precio.toFixed(2)}`;
+                totalUSD += precio;
+            });
+
+            document.getElementById('totalCompra').textContent = `$${totalUSD.toFixed(2)}`;
+            document.getElementById('totalCompraVES').textContent = `Bs. ${(totalUSD * tasaVES).toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
