@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pedidos de Carne - Novillito Express (Carne de Primera) </title>
+    <title>Pedidos de Carne - Novillito Express</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -167,4 +167,24 @@
                     document.getElementById(idPrecio).textContent = `Total: $${precioUSD.toFixed(2)} / Bs. ${precioVES.toFixed(2)}`;
                     return precioUSD;
                 } else {
-                    document.getElementById(idPrecio).
+                    document.getElementById(idPrecio).textContent = "";
+                    return 0;
+                }
+            }
+
+            totalPedidoUSD += actualizarPrecio(parseFloat(document.getElementById("carne_hamburguesa").value || 0), "precio_hamburguesa");
+            totalPedidoUSD += actualizarPrecio(parseFloat(document.getElementById("hotdogs").value || 0), "precio_hotdogs");
+            totalPedidoUSD += actualizarPrecio(parseFloat(document.getElementById("carne_mechar").value || 0), "precio_mechar");
+            totalPedidoUSD += actualizarPrecio(parseFloat(document.getElementById("carne_guisar").value || 0), "precio_guisar");
+            totalPedidoUSD += actualizarPrecio(parseFloat(document.getElementById("pollo").value || 0), "precio_pollo");
+            totalPedidoUSD += actualizarPrecio(parseFloat(document.getElementById("piernas_pollo").value || 0), "precio_piernas_pollo");
+            totalPedidoUSD += actualizarPrecio(parseFloat(document.getElementById("alas_pollo").value || 0), "precio_alas_pollo");
+            totalPedidoUSD += actualizarPrecio(parseFloat(document.getElementById("pechugas_pollo").value || 0), "precio_pechugas_pollo");
+            totalPedidoUSD += actualizarPrecio(parseFloat(document.getElementById("carne_cerdo").value || 0), "precio_cerdo");
+
+            const totalPedidoVES = totalPedidoUSD * tasaDeCambio;
+            document.getElementById("totalPedido").textContent = `Total a Pagar: $${totalPedidoUSD.toFixed(2)} / Bs. ${totalPedidoVES.toFixed(2)}`;
+        }
+    </script>
+</body>
+</html>
