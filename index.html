@@ -1,110 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedidos de Carne - Novillito Express</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-
-        h1 {
-            text-align: center;
-        }
-
-        .form-container {
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        label,
-        input,
-        select,
-        textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background-color: #45a049;
-        }
-
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { text-align: center; }
+        .form-container { max-width: 900px; margin: 0 auto; }
+        label, input, select, textarea { width: 100%; padding: 10px; margin: 10px 0; }
+        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
         .product-list {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
             list-style-type: none;
             padding-left: 0;
         }
-
-        .product-item {
-            margin-bottom: 15px;
-        }
-
-        .price-info {
-            font-size: 0.9em;
-            color: gray;
-        }
-
-        .total-price {
-            font-weight: bold;
-            color: green;
-        }
-
-        .order-total {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #333;
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .payment-methods img {
-            width: 30px;
-            margin: 10px 10px 0 0;
-            cursor: pointer;
-        }
-
-        .payment-methods a {
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-
-        .payment-methods a span {
-            margin-left: 10px;
-            color: #333;
-            font-size: 1em;
-        }
-
-        .whatsapp-btn {
-            margin-top: 20px;
-            text-align: center;
-        }
-
-        .whatsapp-btn img {
-            width: 40px;
-        }
+        .product-item { margin-bottom: 15px; }
+        .price-info { font-size: 0.9em; color: gray; }
+        .total-price { font-weight: bold; color: green; }
+        .order-total { font-size: 1.2em; font-weight: bold; color: #333; margin-top: 20px; text-align: center; }
+        .payment-methods a { display: block; margin: 10px 0; color: #4CAF50; text-decoration: none; }
+        .payment-methods a:hover { text-decoration: underline; }
+        .whatsapp-btn { display: flex; justify-content: center; margin-top: 20px; }
+        .whatsapp-btn a { text-decoration: none; color: #25D366; font-size: 1.2em; }
+        .whatsapp-btn img { width: 30px; margin-right: 10px; }
     </style>
 </head>
-
 <body>
     <h1>Realiza tu Pedido de Carne - Novillito Express</h1>
     <div class="form-container">
-        <form action="https://formsubmit.co/your-email@example.com" method="POST" id="orderForm">
+        <form id="orderForm">
             <!-- Nombre del Cliente -->
             <label for="name">Nombre</label>
             <input type="text" id="name" name="name" required>
@@ -116,8 +44,14 @@
             <!-- Selección de Productos y Cantidades -->
             <label for="productos">Selecciona los Productos</label>
             <ul class="product-list">
-                <!-- Repetir productos como el ejemplo inicial -->
-                <!-- Cada producto incluye input para kg, precio unitario y total -->
+                <!-- Lista de productos -->
+                <li class="product-item">
+                    <label for="carne_molida">Carne Molida</label>
+                    <input type="number" id="carne_molida" name="carne_molida" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
+                    <span class="price-info">Precio: $1 por kg</span>
+                    <div id="precio_carne_molida" class="total-price"></div>
+                </li>
+                <!-- Agrega los demás productos aquí con la misma estructura -->
             </ul>
 
             <!-- Dirección Completa -->
@@ -127,26 +61,11 @@
             <!-- Métodos de Pago -->
             <label for="pago">Selecciona tu Método de Pago</label>
             <div class="payment-methods">
-                <a href="https://wa.me/c/51994713144" target="_blank">
-                    <img src="whatsapp-icon.png" alt="WhatsApp">
-                    <span>WhatsApp</span>
-                </a>
-                <a href="https://usdt-wallet-address" target="_blank">
-                    <img src="usdt-icon.png" alt="USDT">
-                    <span>USDT Wallet</span>
-                </a>
-                <a href="banesco://51648643516848641351" target="_blank">
-                    <img src="banesco-icon.png" alt="Banesco">
-                    <span>Banesco</span>
-                </a>
-                <a href="venezuela://51544640113135413541" target="_blank">
-                    <img src="venezuela-icon.png" alt="Banco de Venezuela">
-                    <span>Banco de Venezuela</span>
-                </a>
-                <a href="pago-movil://967046200" target="_blank">
-                    <img src="pago-movil-icon.png" alt="Pago Móvil">
-                    <span>Pago Móvil</span>
-                </a>
+                <a href="https://wa.me/c/51994713144" target="_blank">WhatsApp</a>
+                <a href="https://billetera.usdt/" target="_blank">USDT (0.000000000000000)</a>
+                <a href="https://banesco.com/51648643516848641351" target="_blank">Banesco (51648643516848641351)</a>
+                <a href="https://venezuela.com/51544640113135413541" target="_blank">Banco de Venezuela (51544640113135413541)</a>
+                <a href="https://pagomovil.com/967046200" target="_blank">Pago Móvil (967046200)</a>
             </div>
 
             <!-- Botón de Enviar Pedido -->
@@ -155,36 +74,27 @@
             <!-- WhatsApp -->
             <div class="whatsapp-btn">
                 <a href="https://wa.me/c/51994713144" target="_blank">
-                    <img src="whatsapp-icon.png" alt="WhatsApp"> Contáctanos por WhatsApp
+                    <img src="whatsapp-icon.png" alt="WhatsApp">
+                    Contáctanos por WhatsApp
                 </a>
             </div>
         </form>
-
-        <!-- Total -->
         <div class="order-total">
-            <p>Total de tu pedido: <span id="totalCompra">$0</span></p>
+            <p>Total de tu pedido: <span id="totalCompra">$0.00</span></p>
         </div>
     </div>
 
     <script>
         function calcularPrecio() {
             const preciosPorKg = {
-                carne_hamburguesa: 1,
                 carne_molida: 1,
-                carne_mechar: 1,
-                carne_guisar: 1,
-                bisteck: 1,
-                pollo_entero: 1,
-                carne_cerdo: 1,
-                alas_pollo: 1,
-                piernas_pollo: 1,
-                pechuga_pollo: 1
+                // Agrega los demás productos aquí
             };
 
             let total = 0;
             Object.keys(preciosPorKg).forEach(producto => {
-                const cantidad = document.getElementById(producto).value || 0;
-                const precio = preciosPorKg[producto] * parseFloat(cantidad);
+                const cantidad = parseFloat(document.getElementById(producto).value) || 0;
+                const precio = preciosPorKg[producto] * cantidad;
                 document.getElementById('precio_' + producto).textContent = `$${precio.toFixed(2)}`;
                 total += precio;
             });
@@ -193,5 +103,4 @@
         }
     </script>
 </body>
-
 </html>
