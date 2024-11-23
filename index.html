@@ -5,76 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedidos de Carne - Novillito Express</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-        label, input, select, textarea {
-            width: 100%;
-            padding: 10px;
-            margin: 10px 0;
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { text-align: center; }
+        .form-container { max-width: 900px; margin: 0 auto; }
+        label, input, select, textarea { width: 100%; padding: 10px; margin: 10px 0; }
+        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
+        button:hover { background-color: #45a049; }
         .product-list {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
+            gap: 15px;
             list-style-type: none;
             padding-left: 0;
-            margin: 20px 0;
         }
-        .product-item {
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 10px;
-            text-align: center;
-        }
-        .price-info {
-            font-size: 0.9em;
-            color: gray;
-            margin-top: 5px;
-        }
-        .total-price {
-            font-weight: bold;
-            color: green;
-            margin-top: 5px;
-        }
-        .order-total {
-            font-size: 1.2em;
-            font-weight: bold;
-            color: #333;
-            margin-top: 20px;
-            text-align: center;
-        }
-        .rate-info {
-            text-align: center;
-            font-size: 1.1em;
-            margin: 10px 0;
-            color: blue;
-        }
+        .product-item { margin-bottom: 15px; }
+        .price-info { font-size: 0.9em; color: gray; }
+        .total-price { font-weight: bold; color: green; }
+        .order-total { font-size: 1.2em; font-weight: bold; color: #333; margin-top: 20px; }
     </style>
 </head>
 <body>
     <h1>Realiza tu Pedido de Carne - Novillito Express</h1>
-    <div class="rate-info" id="rateInfo">
-        Cargando tasa de cambio actual del BCV...
-    </div>
     <div class="form-container">
         <form action="https://formsubmit.co/your-email@example.com" method="POST" id="orderForm">
             <!-- Nombre del Cliente -->
@@ -88,13 +39,14 @@
             <!-- Selección de Productos y Cantidades -->
             <label for="productos">Selecciona los Productos</label>
             <ul class="product-list">
+                <!-- Productos aquí -->
                 <li class="product-item">
                     <label for="carne_hamburguesa">Carne de Hamburguesa</label>
                     <input type="number" id="carne_hamburguesa" name="carne_hamburguesa" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" required oninput="calcularPrecio()">
-                    <span class="price-info">Precio: $2 por kg / Bs. depende del día</span>
+                    <span class="price-info">Precio: $2 por kg / Bs. 92.12 por kg</span>
                     <div id="precio_hamburguesa" class="total-price"></div>
                 </li>
-                <!-- Repetir los demás productos como antes -->
+                <!-- Agregar los demás productos de manera similar -->
             </ul>
 
             <!-- Dirección Completa -->
@@ -116,27 +68,31 @@
     </div>
 
     <script>
-        let tasaDeCambio = 0; // Se actualizará automáticamente
+        let tasaDeCambio = 46.06; // Valor inicial de la tasa
 
-        async function obtenerTasaBCV() {
+        // Función para obtener la tasa de cambio desde una API
+        async function obtenerTasaDeCambio() {
             try {
-                const respuesta = await fetch('https://api.bcv.org.ve/endpoint-de-ejemplo'); // Coloca aquí el endpoint real de la API
-                const data = await respuesta.json();
-
-                // Extraer la tasa de la respuesta
-                tasaDeCambio = data.rate; // Cambia esto según la estructura de la respuesta
-                document.getElementById("rateInfo").textContent = `Tasa del BCV: 1 USD = Bs. ${tasaDeCambio.toFixed(2)}`;
+                const response = await fetch('https://api.exchangerate-api.com/v4/latest/USD'); // API externa para tasas de cambio
+                const data = await response.json();
+                tasaDeCambio = data.rates.VES;  // Usamos la tasa del VES (Venezolano)
+                calcularPrecio(); // Recalcular precios con la tasa actualizada
             } catch (error) {
-                console.error("Error al obtener la tasa de cambio:", error);
-                document.getElementById("rateInfo").textContent = "No se pudo cargar la tasa del BCV.";
-                tasaDeCambio = 46.06; // Tasa predeterminada en caso de error
+                console.error("Error al obtener la tasa de cambio", error);
+                tasaDeCambio = 46.06; // Valor por defecto si la API falla
             }
         }
 
+        // Llamar a la función para obtener la tasa de cambio cuando se carga la página
+        window.onload = obtenerTasaDeCambio;
+
+        // Función para calcular el precio total
         function calcularPrecio() {
+            // Precio base por kg
             const precioPorKgUSD = 2;
             let totalPedidoUSD = 0;
 
+            // Función para actualizar el precio de un producto en ambas monedas
             function actualizarPrecio(cantidad, idPrecio) {
                 let precioUSD = cantidad * precioPorKgUSD;
                 let precioVES = precioUSD * tasaDeCambio;
@@ -150,15 +106,20 @@
                 }
             }
 
-            totalPedidoUSD += actualizarPrecio(parseFloat(document.getElementById("carne_hamburguesa").value || 0), "precio_hamburguesa");
-            // Repetir para otros productos...
+            // Obtener las cantidades de los productos
+            let carneHamburguesa = parseFloat(document.getElementById('carne_hamburguesa').value) || 0;
+            // Agregar los demás productos de manera similar
 
-            const totalPedidoVES = totalPedidoUSD * tasaDeCambio;
-            document.getElementById("totalPedido").textContent = `Total a Pagar: $${totalPedidoUSD.toFixed(2)} / Bs. ${totalPedidoVES.toFixed(2)}`;
+            // Actualizar precios individuales de cada producto
+            totalPedidoUSD += actualizarPrecio(carneHamburguesa, 'precio_hamburguesa');
+            // Actualizar los demás productos
+
+            // Calcular total en VES
+            let totalPedidoVES = totalPedidoUSD * tasaDeCambio;
+
+            // Mostrar el total en ambas monedas
+            document.getElementById('totalPedido').textContent = `Total a Pagar: $${totalPedidoUSD.toFixed(2)} / Bs. ${totalPedidoVES.toFixed(2)}`;
         }
-
-        // Llamar a la función al cargar la página
-        obtenerTasaBCV();
     </script>
 </body>
 </html>
