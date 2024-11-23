@@ -117,41 +117,31 @@
 
             <!-- Dirección Completa -->
             <label for="direccion">Dirección de Envío</label>
-            <textarea id="direccion" name="direccion" rows="3" required placeholder="Calle/Av, Nº Casa, Urb, Municipio, Estado"></textarea>
+            <textarea id="direccion" name="direccion" rows="3" required placeholder="Ingresa tu dirección completa"></textarea>
 
-            <!-- Adjuntar Voucher de Pago -->
-            <label for="voucher">Adjuntar Voucher de Pago</label>
-            <input type="file" id="voucher" name="voucher" accept="image/*, .pdf" required>
+            <!-- Método de Pago -->
+            <label for="pago">Selecciona tu Método de Pago</label>
+            <div class="payment-methods">
+                <a href="https://wa.me/1234567890" target="_blank"><img src="whatsapp-icon.png" alt="WhatsApp"></a>
+                <a href="https://www.paypal.com" target="_blank"><img src="paypal-icon.png" alt="PayPal"></a>
+            </div>
 
-            <!-- Botón de Enviar -->
+            <!-- Botón de Enviar Pedido -->
             <button type="submit">Enviar Pedido</button>
+
+            <!-- WhatsApp -->
+            <div class="whatsapp-btn">
+                <a href="https://wa.me/1234567890" target="_blank"><img src="whatsapp-icon.png" alt="WhatsApp"> Contáctanos por WhatsApp</a>
+            </div>
         </form>
-
-        <!-- Totalizado del Pedido -->
-        <div class="order-total" id="totalPedido">
-            Total a Pagar: $0.00 / Bs. 0.00
-        </div>
-
-        <!-- Métodos de Pago -->
-        <div class="payment-methods" style="text-align:center;">
-            <h2>Métodos de Pago</h2>
-            <a href="https://www.pagoefe.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/Logo_Efectivo.png/280px-Logo_Efectivo.png" alt="Pago EFE"></a>
-            <a href="https://www.paypal.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/3/39/PayPal_logo_2014.svg" alt="PayPal"></a>
-            <a href="https://www.mercadopago.com.pe" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/af/Mercado_Pago_logo.svg" alt="Mercado Pago"></a>
-        </div>
-
-        <!-- WhatsApp -->
-        <div class="whatsapp-btn">
-            <a href="https://wa.me/1234567890" target="_blank">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/67/WhatsApp.svg" alt="WhatsApp"> 
-                Contactar por WhatsApp
-            </a>
+        <div class="order-total">
+            <p>Total de tu pedido: <span id="totalCompra">$0</span></p>
         </div>
     </div>
 
     <script>
         function calcularPrecio() {
-            const precios = {
+            const preciosPorKg = {
                 carne_hamburguesa: 1,
                 carne_molida: 1,
                 carne_mechar: 1,
@@ -165,20 +155,14 @@
             };
 
             let total = 0;
+            Object.keys(preciosPorKg).forEach(producto => {
+                const cantidad = document.getElementById(producto).value;
+                const precio = preciosPorKg[producto] * cantidad;
+                document.getElementById('precio_' + producto).textContent = `$${precio.toFixed(2)}`;
+                total += precio;
+            });
 
-            for (let producto in precios) {
-                const cantidad = parseFloat(document.getElementById(producto).value) || 0;
-                const precio = precios[producto];
-                total += cantidad * precio;
-
-                // Mostrar precios individuales
-                const precioElemento = document.getElementById(`precio_${producto}`);
-                precioElemento.textContent = `Total: $${(cantidad * precio).toFixed(2)}`;
-            }
-
-            // Mostrar total
-            const totalPedido = document.getElementById("totalPedido");
-            totalPedido.textContent = `Total a Pagar: $${total.toFixed(2)} / Bs. ${(total * 25).toFixed(2)}`;
+            document.getElementById('totalCompra').textContent = `$${total.toFixed(2)}`;
         }
     </script>
 </body>
