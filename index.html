@@ -133,6 +133,12 @@
             <!-- Botón de Enviar Pedido -->
             <button type="submit">Enviar Pedido</button>
 
+            <!-- Totalizado del Pedido -->
+        <div class="order-total" id="totalPedido">
+            Total a Pagar: $0.00 / Bs. 0.00
+        </div>
+    </div>
+
             <!-- WhatsApp -->
             <div class="whatsapp-btn">
                 <a href="https://wa.me/c/51994713144" target="_blank">
@@ -163,6 +169,51 @@
 
             document.getElementById('totalCompra').textContent = `$${total.toFixed(2)}`;
         }
+              // Función para actualizar el precio de un producto en ambas monedas
+            function actualizarPrecio(cantidad, idPrecio, producto) {
+                let precioUSD = cantidad * precioPorKgUSD[producto];
+                let precioVES = precioUSD * tasaDeCambio;
+
+                if (cantidad >= 0.5) {
+                    document.getElementById(idPrecio).textContent = `Total: $${precioUSD.toFixed(2)} / Bs. ${precioVES.toFixed(2)}`;
+                    return precioUSD;
+                } else {
+                    document.getElementById(idPrecio).textContent = "";
+                    return 0;
+                }
+            }
+
+            // Obtener las cantidades de los productos
+            let carneHamburguesa = parseFloat(document.getElementById('carne_hamburguesa').value) || 0;
+            let carneMolida = parseFloat(document.getElementById('carne_molida').value) || 0;
+            let carneMechar = parseFloat(document.getElementById('carne_mechar').value) || 0;
+            let carneGuisar = parseFloat(document.getElementById('carne_guisar').value) || 0;
+            let bisteck = parseFloat(document.getElementById('bisteck').value) || 0;
+            let polloEntero = parseFloat(document.getElementById('pollo_entero').value) || 0;
+            let carneCerdo = parseFloat(document.getElementById('carne_cerdo').value) || 0;
+            let alasPollo = parseFloat(document.getElementById('alas_pollo').value) || 0;
+            let piernasPollo = parseFloat(document.getElementById('piernas_pollo').value) || 0;
+            let pechugaPollo = parseFloat(document.getElementById('pechuga_pollo').value) || 0;
+
+            // Actualizar precios individuales de cada producto
+            totalPedidoUSD += actualizarPrecio(carneHamburguesa, 'precio_hamburguesa', 'carne_hamburguesa');
+            totalPedidoUSD += actualizarPrecio(carneMolida, 'precio_molida', 'carne_molida');
+            totalPedidoUSD += actualizarPrecio(carneMechar, 'precio_mechar', 'carne_mechar');
+            totalPedidoUSD += actualizarPrecio(carneGuisar, 'precio_guisar', 'carne_guisar');
+            totalPedidoUSD += actualizarPrecio(bisteck, 'precio_bisteck', 'bisteck');
+            totalPedidoUSD += actualizarPrecio(polloEntero, 'precio_pollo_entero', 'pollo_entero');
+            totalPedidoUSD += actualizarPrecio(carneCerdo, 'precio_cerdo', 'carne_cerdo');
+            totalPedidoUSD += actualizarPrecio(alasPollo, 'precio_alas_pollo', 'alas_pollo');
+            totalPedidoUSD += actualizarPrecio(piernasPollo, 'precio_piernas_pollo', 'piernas_pollo');
+            totalPedidoUSD += actualizarPrecio(pechugaPollo, 'precio_pechuga_pollo', 'pechuga_pollo');
+
+            // Calcular total en VES
+            let totalPedidoVES = totalPedidoUSD * tasaDeCambio;
+
+            // Mostrar el total en ambas monedas
+            document.getElementById('totalPedido').textContent = `Total a Pagar: $${totalPedidoUSD.toFixed(2)} / Bs. ${totalPedidoVES.toFixed(2)}`;
+        }
+    </script>
     </script>
 </body>
 </html>
