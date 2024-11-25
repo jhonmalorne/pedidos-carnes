@@ -145,19 +145,49 @@
       <!-- Dirección Completa -->
       <label for="direccion">Dirección de Envío</label>
       <textarea id="direccion" name="direccion" rows="3" required placeholder="Ingresa tu dirección completa"></textarea>
-      <!-- Métodos de Pago -->
-      <div class="payment-methods">
-        <h3>Elige tu Método de Pago</h3>
-        <a href="#">Pago en efectivo</a>
-        <a href="#">Pago con transferencia bancaria</a>
-        <a href="#">Pago móvil</a>
-      <!-- Botón de Envío -->
-      <button type="submit">Enviar Pedido</button>
-    </form>
-    <div class="order-total">
-      <p>Total: <span id="totalPrice">0</span></p>
+     <div class="form-container">
+  <form id="orderForm">
+    <!-- Aquí van tus inputs y selecciones de productos -->
+
+    <!-- Nueva Sección de Métodos de Pago -->
+    <div class="payment-methods">
+      <h3>Métodos de Pago</h3>
+      
+      <!-- Pago móvil -->
+      <div class="payment-option">
+        <strong>Pago Móvil:</strong>
+        <p>Banco: Banco de Venezuela</p>
+        <p>Teléfono: +58 424-1234567</p>
+        <p>C.I.: 12345678</p>
+      </div>
+      
+      <!-- USDT -->
+      <div class="payment-option">
+        <strong>USDT:</strong>
+        <p>Red: TRC20</p>
+        <p>Wallet: TXXXXXXXXXXXXXXX</p>
+      </div>
+      
+      <!-- Transferencias bancarias -->
+      <div class="payment-option">
+        <strong>Transferencia Bancaria:</strong>
+        <ul>
+          <li><strong>Banco de Venezuela:</strong> Cuenta Corriente 0102-0123-123456789012</li>
+          <li><strong>Banesco:</strong> Cuenta Corriente 0134-1234-567890123456</li>
+          <li><strong>Provincial:</strong> Cuenta Corriente 0108-1234-567890123456</li>
+          <li><strong>Mercantil:</strong> Cuenta Corriente 0105-1234-567890123456</li>
+        </ul>
+      </div>
     </div>
+
+    <!-- Botón de envío del formulario -->
+    <button type="submit">Enviar Pedido</button>
+  </form>
+  <div class="order-total">
+    <p>Total: <span id="totalPrice">0</span></p>
   </div>
+</div>
+
 
   <script>
     let currency = 'usd';
