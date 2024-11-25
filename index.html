@@ -1,6 +1,3 @@
-¡Claro! Aquí tienes el código HTML actualizado para que el cliente pueda seleccionar el tipo de moneda (USD, VES, USDT) y los precios se actualicen de acuerdo a su elección:
-
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -8,12 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedidos de Carne - Novillito Express</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        h1 { text-align: center; }
-        .form-container { max-width: 900px; margin: 0 auto; }
-        label, input, select, textarea { width: 100%; padding: 10px; margin: 10px 0; }
-        button { padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer; }
-        button:hover { background-color: #45a049; }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .form-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        label, input, select, textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
         .product-list {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -21,38 +38,83 @@
             list-style-type: none;
             padding-left: 0;
         }
-        .product-item { margin-bottom: 15px; padding: 10px; border: 1px solid #ccc; border-radius: 8px; text-align: center; }
-        .price-info { font-size: 0.9em; color: gray; }
-        .total-price { font-weight: bold; color: green; }
-        .order-total { font-size: 1.2em; font-weight: bold; color: #333; margin-top: 20px; text-align: center; }
-        .payment-methods a { display: block; margin: 10px 0; color: #4CAF50; text-decoration: none; }
-        .payment-methods a:hover { text-decoration: underline; }
-        .whatsapp-btn { display: flex; justify-content: center; margin-top: 20px; }
-        .whatsapp-btn a { text-decoration: none; color: #25D366; font-size: 1.2em; }
-        .whatsapp-btn img { width: 30px; margin-right: 10px; }
-        .currency-selector { text-align: right; margin-bottom: 20px; }
+        .product-item {
+            margin-bottom: 15px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            text-align: center;
+        }
+        .price-info {
+            font-size: 0.9em;
+            color: gray;
+        }
+        .total-price {
+            font-weight: bold;
+            color: green;
+        }
+        .order-total {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #333;
+            margin-top: 20px;
+            text-align: center;
+        }
+        .payment-methods a {
+            display: block;
+            margin: 10px 0;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+        .payment-methods a:hover {
+            text-decoration: underline;
+        }
+        .whatsapp-btn {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .whatsapp-btn a {
+            text-decoration: none;
+            color: #25D366;
+            font-size: 1.2em;
+        }
+        .whatsapp-btn img {
+            width: 30px;
+            margin-right: 10px;
+        }
+        .currency-selector {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+        .currency-selector select {
+            padding: 5px 10px;
+            font-size: 1em;
+        }
     </style>
 </head>
 <body>
+    <!-- Selector de Moneda -->
+    <div class="currency-selector">
+        <label for="currency">Moneda: </label>
+        <select id="currency" onchange="cambiarMoneda()">
+            <option value="USD">USD</option>
+            <option value="VES">VES</option>
+            <option value="USDT">USDT</option>
+        </select>
+    </div>
+
     <h1>Realiza tu Pedido de Carne - Novillito Express</h1>
+
     <div class="form-container">
-        <div class="currency-selector">
-            <label for="currency">Selecciona la Moneda:</label>
-            <select id="currency" onchange="calcularPrecio()">
-                <option value="USD">USD</option>
-                <option value="VES">VES</option>
-                <option value="USDT">USDT</option>
-            </select>
-        </div>
         <form id="orderForm">
             <!-- Nombre del Cliente -->
             <label for="name">Nombre</label>
             <input type="text" id="name" name="name" required>
-
             <!-- Teléfono del Cliente -->
             <label for="telefono">Teléfono</label>
             <input type="tel" id="telefono" name="telefono" required>
-
             <!-- Selección de Productos y Cantidades -->
             <label for="productos">Selecciona los Productos</label>
             <ul class="product-list">
@@ -121,10 +183,52 @@
                     <div id="precio_bisteck_ves" class="total-price"></div>
                 </li>
             </ul>
-
+            
             <!-- Dirección Completa -->
             <label for="direccion">Dirección de Envío</label>
             <textarea id="direccion" name="direccion" rows="3" required placeholder="Ingresa tu dirección completa"></textarea>
-
             <!-- Métodos de Pago -->
-            <div class="
+            <div class="payment-methods">
+                <h3>Elige tu Método de Pago</h3>
+                <a href="#">Pago en efectivo</a>
+                <a href="#">Pago con transferencia bancaria</a>
+                <a href="#">Pago móvil</a>
+            </div>
+            <!-- Botón de Envío -->
+            <button type="submit">Enviar Pedido</button>
+        </form>
+        <div class="order-total">
+            <p>Total: <span id="totalPrecio">0</span> <span id="monedaActual">USD</span></p>
+        </div>
+        <div class="whatsapp-btn">
+            <a href="https://wa.me/123456789" target="_blank">
+                <img src="logo_de_whatsapp.jpg" alt="whatsapp"> Contáctanos por WhatsApp
+            </a>
+        </div>
+    </div>
+
+    <script>
+        let moneda = 'USD';
+        const tasasCambio = { USD: 1, VES: 46.68, USDT: 1 };
+        const preciosBase = { carne_molida: 1 }; // Añade más productos aquí.
+
+        function calcularPrecio() {
+            let total = 0;
+            for (let producto in preciosBase) {
+                const cantidad = parseFloat(document.getElementById(producto)?.value) || 0;
+                const precio = cantidad * preciosBase[producto] * tasasCambio[moneda];
+                total += precio;
+                const info = document.getElementById(`precio_${producto}`);
+                if (info) info.textContent = `Total: ${precio.toFixed(2)} ${moneda}`;
+            }
+            document.getElementById('totalPrecio').textContent = total.toFixed(2);
+        }
+
+        function cambiarMoneda() {
+            moneda = document.getElementById('currency').value;
+            document.getElementById('monedaActual').textContent = moneda;
+            calcularPrecio();
+        }
+    </script>
+</body>
+</html>
