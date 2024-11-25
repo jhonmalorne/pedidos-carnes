@@ -8,41 +8,58 @@
     body {
       font-family: Arial, sans-serif;
       margin: 20px;
+      background-color: #f9f9f9;
+      color: #333;
     }
     h1 {
       text-align: center;
+      color: #4CAF50;
     }
     .form-container {
       max-width: 900px;
       margin: 0 auto;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
-    label, input, select, textarea {
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+    input, select, textarea {
       width: 100%;
       padding: 10px;
-      margin: 10px 0;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
     }
     button {
       padding: 10px 20px;
       background-color: #4CAF50;
       color: white;
       border: none;
+      border-radius: 4px;
       cursor: pointer;
+      font-size: 16px;
     }
     button:hover {
       background-color: #45a049;
     }
     .product-list {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
       gap: 15px;
       list-style-type: none;
       padding-left: 0;
     }
     .product-item {
-      margin-bottom: 15px;
-      padding: 10px;
+      padding: 15px;
       border: 1px solid #ccc;
       border-radius: 8px;
+      background-color: #f1f1f1;
       text-align: center;
     }
     .price-info {
@@ -109,8 +126,7 @@
       <!-- Selección de Productos y Cantidades -->
       <label for="productos">Selecciona los Productos</label>
       <ul class="product-list">
-        <!-- Ejemplo de producto -->
-        <li class="product-item">
+           <li class="product-item">
           <label for="carne_molida">Carne Molida</label>
           <input type="number" id="carne_molida" name="carne_molida" min="0.5" max="20" step="0.5" placeholder="Cantidad (kg)" oninput="calcularPrecio()">
           <span class="price-info" data-usd="1" data-ves="46.68">Precio: $1 por kg</span>
@@ -172,6 +188,7 @@
                     <div id="precio_bisteck" class="total-price"></div>
                     <div id="precio_bisteck_ves" class="total-price"></div>
                 </li>
+                  <!-- Puedes agregar más productos aquí -->
       </ul>
       <!-- Dirección Completa -->
       <label for="direccion">Dirección de Envío</label>
@@ -191,7 +208,7 @@
     </div>
     <div class="whatsapp-btn">
       <a href="https://wa.me/123456789" target="_blank">
-        <img src="logo_de_whatsapp.jpg" alt="whatsapp">
+        <img src="logo_de_whatsapp.jpg" alt="whatsapp"> Contáctanos por WhatsApp
       </a>
     </div>
   </div>
@@ -215,7 +232,7 @@
 
         total += subtotal;
 
-        totalPriceElement.textContent = `Total: ${currency === 'usd' ? '$' : ''}${subtotal.toFixed(2)} ${currency === 'ves' ? 'VES' : ''}`;
+        totalPriceElement.textContent = `Subtotal: ${currency === 'usd' ? '$' : ''}${subtotal.toFixed(2)} ${currency === 'ves' ? 'VES' : ''}`;
       });
 
       document.getElementById('totalPrice').textContent = `${currency === 'usd' ? '$' : ''}${total.toFixed(2)} ${currency === 'ves' ? 'VES' : ''}`;
