@@ -1,3 +1,6 @@
+¡Claro! Aquí tienes el código HTML actualizado para que el cliente pueda seleccionar el tipo de moneda (USD, VES, USDT) y los precios se actualicen de acuerdo a su elección:
+
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -27,11 +30,20 @@
         .whatsapp-btn { display: flex; justify-content: center; margin-top: 20px; }
         .whatsapp-btn a { text-decoration: none; color: #25D366; font-size: 1.2em; }
         .whatsapp-btn img { width: 30px; margin-right: 10px; }
+        .currency-selector { text-align: right; margin-bottom: 20px; }
     </style>
 </head>
 <body>
     <h1>Realiza tu Pedido de Carne - Novillito Express</h1>
     <div class="form-container">
+        <div class="currency-selector">
+            <label for="currency">Selecciona la Moneda:</label>
+            <select id="currency" onchange="calcularPrecio()">
+                <option value="USD">USD</option>
+                <option value="VES">VES</option>
+                <option value="USDT">USDT</option>
+            </select>
+        </div>
         <form id="orderForm">
             <!-- Nombre del Cliente -->
             <label for="name">Nombre</label>
@@ -115,79 +127,4 @@
             <textarea id="direccion" name="direccion" rows="3" required placeholder="Ingresa tu dirección completa"></textarea>
 
             <!-- Métodos de Pago -->
-            <div class="payment-methods">
-                <h3>Elige tu Método de Pago</h3>
-                <a href="#">Pago en efectivo</a>
-                <a href="#">Pago con transferencia bancaria</a>
-                <a href="#">Pago móvil</a>
-            </div>
-
-            <!-- Botón de Envío -->
-            <button type="submit">Enviar Pedido</button>
-        </form>
-
-        <div class="order-total">
-            <p>Total en USD: <span id="totalUsd">0</span> USD</p>
-            <p>Total en VES: <span id="totalVes">0</span> VES</p>
-        </div>
-
-        <div class="whatsapp-btn">
-            <a href="https://wa.me/123456789" target="_blank">
-<img src="logo_de_whatsapp.jpg" alt="whatsapp">
-            </a>
-        </div>
-    </div>
-
-    <script>
-        function calcularPrecio() {
-            // Precios base en USD por kg
-            const precios = {
-                carne_molida: 1,
-                carne_guisar: 1,
-                carne_mechar: 1,
-                carne_hamburguesa: 1,
-                pollo: 4.83,
-                carne_cerdo: 1,
-                alas_pollo: 1,
-                piernas_pollo: 1,
-                bisteck: 1
-            };
-
-            // Tasas de cambio a VES (esto puede cambiar según el mercado)
-            const tasasCambio = {
-                carne_molida: 46.68,
-                carne_guisar: 46.68,
-                carne_mechar: 46.68,
-                carne_hamburguesa: 46.68,
-                pollo: 223.77,
-                carne_cerdo: 46.68,
-                alas_pollo: 46.68,
-                piernas_pollo: 46.68,
-                bisteck: 46.68
-            };
-
-            let totalUsd = 0;
-            let totalVes = 0;
-
-            // Iterar sobre los productos y calcular el total
-            for (let producto in precios) {
-                let cantidad = parseFloat(document.getElementById(producto).value) || 0;
-                let precioUsd = cantidad * precios[producto];
-                let precioVes = cantidad * precios[producto] * tasasCambio[producto];
-
-                // Mostrar precio individual
-                document.getElementById("precio_" + producto).textContent = "Total: $" + precioUsd.toFixed(2);
-                document.getElementById("precio_" + producto + "_ves").textContent = "Total: " + precioVes.toFixed(2) + " VES";
-
-                // Sumar a los totales
-                totalUsd += precioUsd;
-                totalVes += precioVes;
-            }
-
-            // Mostrar el total de la compra
-            document.getElementById("totalUsd").textContent = totalUsd.toFixed(2);
-            document.getElementById("totalVes").textContent = totalVes.toFixed(2);
-        }
-    </script>
-</body>
-</html>
+            <div class="
